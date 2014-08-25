@@ -1,6 +1,15 @@
 var BleHR = require('heartrate'),
     keypress = require('keypress');
 
+
+module.exports = Pulse;
+
+function Pulse() {
+
+}
+
+Pulse.pulse = 'Unknown';
+
 console.log("Scanning for devices. You can choose any device as they appear. Press 'e' to exit.");
 var devices = [];
 var list = BleHR.list();
@@ -53,12 +62,11 @@ function listenForData(uuid) {
     });
     setInterval(function() {
         if (pulse && printedBattery) {
+            Pulse.pulse = pulse;
             console.log(pulse);
         }
 
     }, 1000);
-
-;
 
     device.on('error', function(error) {
         console.log('Error:');
